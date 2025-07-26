@@ -203,7 +203,8 @@ body {
   bottom: 18%;
   z-index: 10;
   display: none;
-  background: #1976d2;
+  /* Use same gradient as chat-form button */
+  background: linear-gradient(90deg, #c7b299 0%, #000 100%);
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -214,6 +215,12 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 28px;
+  transition: background 0.3s;
+}
+
+/* Flip gradient on hover, like chat-form button */
+.scroll-btn:hover {
+  background: linear-gradient(90deg, #000 0%, #c7b299 100%);
 }
 
 .scroll-btn .material-icons {

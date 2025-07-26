@@ -9,7 +9,11 @@ scrollBtn.className = "scroll-btn";
 scrollBtn.innerHTML = '<span class="material-icons">arrow_downward</span>';
 scrollBtn.setAttribute("aria-label", "Jump to present");
 scrollBtn.addEventListener("click", () => {
-  chatWindow.scrollTop = chatWindow.scrollHeight;
+  // Smoothly scroll to the bottom of the chat window
+  chatWindow.scrollTo({
+    top: chatWindow.scrollHeight,
+    behavior: "smooth"
+  });
   scrollBtn.style.display = "none";
 });
 chatWindow.parentElement.style.position = "relative";
