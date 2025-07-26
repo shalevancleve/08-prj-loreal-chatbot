@@ -47,6 +47,7 @@ body {
 /* chat window */
 .chatbox {
   margin: 40px 0;
+  position: relative;
 }
 
 .chat-window {
@@ -198,8 +199,8 @@ body {
 /* "Jump to present" scroll button */
 .scroll-btn {
   position: absolute;
-  right: 24px;
-  bottom: 24px;
+  left: 50%;
+  bottom: 18%;
   z-index: 10;
   display: none;
   background: #1976d2;

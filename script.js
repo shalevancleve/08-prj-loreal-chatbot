@@ -104,7 +104,6 @@ chatForm.addEventListener("submit", async (e) => {
     typeBotResponse(aiMsg);
     messages.push({ role: "assistant", content: aiMsg });
   } catch (error) {
-    // Remove the "Thinking..." bubble if there's an error
     chatWindow.removeChild(chatWindow.lastChild);
 
     chatWindow.innerHTML += `<div class="msg-row ai"><div class="msg ai">Sorry, there was an error. Please try again.</div></div>`;
