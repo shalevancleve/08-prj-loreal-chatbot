@@ -24,7 +24,13 @@
       <!------- Chat Area ------->
       <main>
         <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
+          <div
+            id="chatWindow"
+            class="chat-window"
+            role="log"
+            aria-live="polite"
+            aria-label="Chat messages"
+          >
             <!-- messages will be appended here via JS -->
           </div>
 

@@ -8,6 +8,8 @@ const scrollBtn = document.createElement("button");
 scrollBtn.className = "scroll-btn";
 scrollBtn.innerHTML = '<span class="material-icons">arrow_downward</span>';
 scrollBtn.setAttribute("aria-label", "Jump to present");
+scrollBtn.setAttribute("tabindex", "0"); // Make button focusable
+scrollBtn.setAttribute("type", "button"); // Ensure it's not a submit button
 scrollBtn.addEventListener("click", () => {
   // Smoothly scroll to the bottom of the chat window
   chatWindow.scrollTo({

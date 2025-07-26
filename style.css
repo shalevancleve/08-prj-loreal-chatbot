@@ -91,7 +91,7 @@ body {
 
 /* user message bubble: blue, right */
 .msg.user {
-  background: #1976d2;
+  background: #1565c0; /* darker blue for better contrast */
   color: #fff;
   border-left: none;
   border-right: none;
@@ -200,6 +200,7 @@ body {
 .scroll-btn {
   position: absolute;
   left: 50%;
+  transform: translateX(-50%);
   bottom: 18%;
   z-index: 10;
   display: none;
@@ -225,4 +226,87 @@ body {
 
 .scroll-btn .material-icons {
   font-size: 28px;
+}
+
+/* --- Accessibility: Focus styles for buttons and inputs --- */
+.chat-form input:focus,
+.chat-form button:focus,
+.scroll-btn:focus,
+.site-footer a:focus {
+  outline: 3px solid #1976d2;
+  outline-offset: 2px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 700px) {
+  .page-wrapper {
+    width: 98%;
+    max-width: 100%;
+    padding: 0 4px;
+  }
+  .site-header {
+    padding-top: 24px;
+    padding-bottom: 6px;
+  }
+  .loreal-logo {
+    width: 120px;
+    margin-bottom: 12px;
+  }
+  .site-title {
+    font-size: 22px;
+  }
+  .chat-window {
+    height: 260px;
+    font-size: 16px;
+    padding: 12px;
+  }
+  .msg {
+    font-size: 16px;
+    padding: 10px 14px;
+    max-width: 90%;
+  }
+  .chat-form input {
+    font-size: 16px;
+    padding: 10px;
+  }
+  .chat-form button,
+  .scroll-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .scroll-btn .material-icons,
+  .chat-form button .material-icons {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-window {
+    height: 50vh; /* Make chat window taller on small screens */
+    padding: 6px;
+    font-size: 15px;
+  }
+  .msg {
+    font-size: 15px;
+    padding: 8px 10px;
+  }
+  .chat-form input {
+    font-size: 15px;
+    padding: 8px;
+  }
+  .chat-form button,
+  .scroll-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+  .scroll-btn .material-icons,
+  .chat-form button .material-icons {
+    font-size: 16px;
+  }
+  .site-footer {
+    font-size: 12px;
+    margin: 32px 0 20px;
+  }
 }
