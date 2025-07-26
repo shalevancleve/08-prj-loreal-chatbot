@@ -12,7 +12,7 @@ scrollBtn.addEventListener("click", () => {
   // Smoothly scroll to the bottom of the chat window
   chatWindow.scrollTo({
     top: chatWindow.scrollHeight,
-    behavior: "smooth"
+    behavior: "smooth",
   });
   scrollBtn.style.display = "none";
 });
