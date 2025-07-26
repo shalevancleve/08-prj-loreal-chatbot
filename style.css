@@ -56,29 +56,54 @@ body {
   font-size: 18px;
   line-height: 1.5;
   overflow-y: auto;
-  background: #f8f6f2; /* subtle off-white */
+  background: #faf0dd; /* subtle off-white */
   white-space: pre-line;
   border-radius: 10px;
 }
 
-/* messages */
-.msg {
+/* messages row container for alignment */
+.msg-row {
+  display: flex;
   margin-bottom: 14px;
+}
+
+/* user message row aligns right */
+.msg-row.user {
+  justify-content: flex-end;
+}
+
+/* bot message row aligns left */
+.msg-row.ai {
+  justify-content: flex-start;
+}
+
+/* message bubbles */
+.msg {
+  max-width: 70%;
+  padding: 12px 18px;
+  border-radius: 22px;
+  font-size: 18px;
   line-height: 1.5;
+  word-break: break-word;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
+/* user message bubble: blue, right */
 .msg.user {
-  color: #000;
-  background: #fffbe6;
-  border-left: 4px solid #c7b299;
-  padding-left: 8px;
+  background: #1976d2;
+  color: #fff;
+  border-left: none;
+  border-right: none;
+  border-radius: 22px 22px 4px 22px;
 }
 
+/* bot message bubble: light grey, left */
 .msg.ai {
-  color: #444;
   background: #f3f3f3;
-  border-left: 4px solid #000;
-  padding-left: 8px;
+  color: #222;
+  border-left: none;
+  border-right: none;
+  border-radius: 22px 22px 22px 4px;
 }
 
 /* input row */

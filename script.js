@@ -12,8 +12,29 @@ let messages = [
   },
 ];
 
-// Show initial greeting
-chatWindow.innerHTML = `<div class="msg ai">👋 Hello! How can I help you today?</div>`;
+// Show initial greeting (bot message, left)
+chatWindow.innerHTML = `<div class="msg-row ai"><div class="msg ai">👋 Hello! How can I help you today?</div></div>`;
+
+// Function to "type out" the bot's response letter by letter
+function typeBotResponse(text) {
+  // Create the bubble and row
+  const msgRow = document.createElement("div");
+  msgRow.className = "msg-row ai";
+  const msgBubble = document.createElement("div");
+  msgBubble.className = "msg ai";
+  msgRow.appendChild(msgBubble);
+  chatWindow.appendChild(msgRow);
+
+  let i = 0;
+  // Use setInterval to add one character at a time
+  const typing = setInterval(() => {
+    msgBubble.textContent += text[i];
+    i++;
+    if (i >= text.length) {
+      clearInterval(typing);
+    }
+  }, 18); // 18ms per character for a smooth effect
+}
 
 /* Handle form submit */
 chatForm.addEventListener("submit", async (e) => {
@@ -23,12 +44,12 @@ chatForm.addEventListener("submit", async (e) => {
   const userMsg = userInput.value;
   messages.push({ role: "user", content: userMsg });
 
-  // Show user's message in chat window
-  chatWindow.innerHTML += `<div class="msg user">${userMsg}</div>`;
+  // Show user's message in chat window (right side, blue bubble)
+  chatWindow.innerHTML += `<div class="msg-row user"><div class="msg user">${userMsg}</div></div>`;
   userInput.value = "";
 
-  // Show loading message
-  chatWindow.innerHTML += `<div class="msg ai">Thinking...</div>`;
+  // Show loading message (bot side, left)
+  chatWindow.innerHTML += `<div class="msg-row ai"><div class="msg ai">Thinking...</div></div>`;
 
   // Keep only the system prompt and last 10 messages
   const systemPrompt = messages[0];
@@ -44,13 +65,19 @@ chatForm.addEventListener("submit", async (e) => {
     });
     const data = await response.json();
 
+    // Remove the "Thinking..." bubble before showing the AI's reply
+    chatWindow.removeChild(chatWindow.lastChild);
+
     // Get AI's reply from response
     const aiMsg = data.choices[0].message.content;
 
-    // Show AI's reply in chat window
-    chatWindow.innerHTML += `<div class="msg ai">${aiMsg}</div>`;
+    // Show AI's reply in chat window, typing out letter by letter
+    typeBotResponse(aiMsg);
     messages.push({ role: "assistant", content: aiMsg });
   } catch (error) {
-    chatWindow.innerHTML += `<div class="msg ai">Sorry, there was an error. Please try again.</div>`;
+    // Remove the "Thinking..." bubble if there's an error
+    chatWindow.removeChild(chatWindow.lastChild);
+
+    chatWindow.innerHTML += `<div class="msg-row ai"><div class="msg ai">Sorry, there was an error. Please try again.</div></div>`;
   }
 });
