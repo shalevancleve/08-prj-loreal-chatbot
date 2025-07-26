@@ -194,3 +194,27 @@ body {
 .site-footer a:hover {
   color: #c7b299;
 }
+
+/* "Jump to present" scroll button */
+.scroll-btn {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+  display: none;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.scroll-btn .material-icons {
+  font-size: 28px;
+}
