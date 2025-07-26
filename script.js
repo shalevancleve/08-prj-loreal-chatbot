@@ -80,9 +80,27 @@ chatForm.addEventListener("submit", async (e) => {
   // Scroll to bottom after user message
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
-  // Show loading message (bot side, left)
-  chatWindow.innerHTML += `<div class="msg-row ai"><div class="msg ai">Thinking...</div></div>`;
+  // Show animated loading message (bot side, left)
+  const thinkingRow = document.createElement("div");
+  thinkingRow.className = "msg-row ai";
+  const thinkingBubble = document.createElement("div");
+  thinkingBubble.className = "msg ai";
+  // Inline "Thinking..." with animated dots
+  thinkingBubble.innerHTML = `<span>Thinking</span><span class="dots" style="display:inline;"><span class="dot" style="font-size:22px;display:inline;">.</span><span class="dot" style="font-size:18px;display:inline;">.</span><span class="dot" style="font-size:18px;display:inline;">.</span></span>`;
+  thinkingRow.appendChild(thinkingBubble);
+  chatWindow.appendChild(thinkingRow);
   chatWindow.scrollTop = chatWindow.scrollHeight;
+
+  // Animate the dots
+  const dots = thinkingBubble.querySelectorAll(".dot");
+  let activeDot = 0;
+  const animateDots = setInterval(() => {
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].style.fontSize = i === activeDot ? "22px" : "18px";
+      dots[i].style.opacity = i === activeDot ? "1" : "0.6";
+    }
+    activeDot = (activeDot + 1) % 3;
+  }, 250);
 
   // Keep only the system prompt and last 10 messages
   const systemPrompt = messages[0];
@@ -98,7 +116,8 @@ chatForm.addEventListener("submit", async (e) => {
     });
     const data = await response.json();
 
-    // Remove the "Thinking..." bubble before showing the AI's reply
+    // Remove the "Thinking..." bubble and stop animation before showing the AI's reply
+    clearInterval(animateDots);
     chatWindow.removeChild(chatWindow.lastChild);
 
     // Get AI's reply from response
@@ -108,6 +127,7 @@ chatForm.addEventListener("submit", async (e) => {
     typeBotResponse(aiMsg);
     messages.push({ role: "assistant", content: aiMsg });
   } catch (error) {
+    clearInterval(animateDots);
     chatWindow.removeChild(chatWindow.lastChild);
 
     chatWindow.innerHTML += `<div class="msg-row ai"><div class="msg ai">Sorry, there was an error. Please try again.</div></div>`;
